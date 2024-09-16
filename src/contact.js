@@ -10,7 +10,7 @@ const contact = `
       </div>
       
       <div class="d-grid gap-2 col-4 col-xxl-1 mx-auto"> 
-          <!-- Кнопка-триггер модального окна -->
+          
         <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#Modal">
           Send message
         </button>

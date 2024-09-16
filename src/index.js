@@ -11,6 +11,8 @@ const yearNow = new Date();
 
 yearsEl.innerText = '<' + `${yearNow.getFullYear() - 2016}` + '>';
 
+/*
+
 function onSubmit() {
   var form = document.getElementById('form');
 
@@ -52,3 +54,4 @@ function validateForm(form) {
 
   return true;
 }
+*/
