@@ -26,7 +26,7 @@ const contact = `
               </div>
               <div class="modal-body">
 
-                <form action="mail.php" method="POST" id="form">
+                <form action="mail.php" method="POST" id="form" data-netlify="true" data-netlify-honeypot="bot-field">
                   <label for="email" class="form-label text-primary">Email address:</label>
                   <div class="input-group mb-4">
                     <span class="input-group-text">
