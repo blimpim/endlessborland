@@ -26,7 +26,8 @@ const contact = `
               </div>
               <div class="modal-body">
 
-                <form action="mail.php" method="POST" id="form" data-netlify="true" data-netlify-honeypot="bot-field">
+                <form action="mail.php" method="POST" id="form" netlify data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+                <input type="hidden" name="bot-field">
                   <label for="email" class="form-label text-primary">Email address:</label>
                   <div class="input-group mb-4">
                     <span class="input-group-text">
@@ -101,6 +102,13 @@ const contact = `
         
     </div>
   </section>
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+      <script>
+      function onSubmit(token) {
+        document.getElementById("form").submit();
+      }
+    </script>
+
 `;
 
 document.getElementById('contact').innerHTML = contact;
