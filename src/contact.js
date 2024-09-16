@@ -101,6 +101,6 @@ const contact = `
         
     </div>
   </section>
-`
+`;
 
-document.getElementById('contact').innerHTML = contact
+document.getElementById('contact').innerHTML = contact;

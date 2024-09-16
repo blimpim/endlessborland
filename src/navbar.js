@@ -33,6 +33,6 @@ const navbar = `<nav class="navbar navbar-expand-md pt-2">
     </ul>
   </div>
 </div>
-</nav>`
+</nav>`;
 
 document.getElementById('navbar').innerHTML = navbar;

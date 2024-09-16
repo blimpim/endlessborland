@@ -14,12 +14,10 @@ const introSection = `
             <a class="btn btn-light col-12 col-xl-1 mt-5 text-primary text-md-center btn-lg" href="#contact" role="button">
               Contact Me!
             </a>
-              
           </div>
-          
         </div>
       </div>
     </section>
 `;
 
-document.getElementById('intro').innerHTML = introSection;
+document.getElementById("intro").innerHTML = introSection;

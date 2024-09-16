@@ -186,6 +186,6 @@ const experience = `
       </div>
     </div>
   </section>
-`
+`;
 
-document.getElementById('experience').innerHTML = experience
+document.getElementById('experience').innerHTML = experience;
