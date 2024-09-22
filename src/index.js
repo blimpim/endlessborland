@@ -8,19 +8,23 @@ import '/src/contact.js';
 const yearsEl = document.getElementById('year_count');
 
 const yearNow = new Date();
-
 yearsEl.innerText = '<' + `${yearNow.getFullYear() - 2016}` + '>';
 
-const recaptchaKey = process.env.SITE_RECAPTCHA_KEY;
+const recaptchaKey = SITE_RECAPTCHA_KEY;
 
 function onSubmit(token) {
   const form = document.getElementById('form');
   if (form) {
-    form.appendChild(document.createElement('input')).setAttribute('name', 'g-recaptcha-response');
-    form.elements['g-recaptcha-response'].value = token;
+    let recaptchaField = form.querySelector('input[name="g-recaptcha-response"]');
+    if (!recaptchaField) {
+      recaptchaField = document.createElement('input');
+      recaptchaField.setAttribute('type', 'hidden');
+      recaptchaField.setAttribute('name', 'g-recaptcha-response');
+      form.appendChild(recaptchaField);
+    }
+    recaptchaField.value = token;
 
     const formData = new FormData(form);
-
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -42,11 +46,16 @@ function onSubmit(token) {
 
 document.addEventListener('DOMContentLoaded', function () {
   const submitButton = document.getElementById('submit');
-  if (submitButton) {
-    submitButton.addEventListener('click', function (event) {
-      event.preventDefault();
-      grecaptcha.execute(config.recaptchaKey, { action: 'submit' }).then(onSubmit);
-    });
+
+  if (typeof grecaptcha !== 'undefined') {
+    if (submitButton) {
+      submitButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        grecaptcha.execute(recaptchaKey, { action: 'submit' }).then(onSubmit);
+      });
+    }
+  } else {
+    console.error('grecaptcha is not defined. Ensure that reCAPTCHA is loaded properly.');
   }
 });
 

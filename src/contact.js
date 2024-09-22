@@ -49,6 +49,7 @@ const contact = `
                   <button id="submit" type="submit" value="Submit" class="btn btn-primary btn-4 g-recaptcha"  data-callback="onSubmit" data-size="invisible" style="font-family: Electrolize;">Send!</button>
                 </div>
               </form>
+              
       </div>
 
 <!-- Contact Modal -->
@@ -62,7 +63,7 @@ const contact = `
               <div class="modal-body">
 
               
-              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+              
                               
               </div>
               
