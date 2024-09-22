@@ -11,6 +11,45 @@ const yearNow = new Date();
 
 yearsEl.innerText = '<' + `${yearNow.getFullYear() - 2016}` + '>';
 
+const recaptchaKey = process.env.SITE_RECAPTCHA_KEY;
+
+function onSubmit(token) {
+  const form = document.getElementById('form');
+  if (form) {
+    form.appendChild(document.createElement('input')).setAttribute('name', 'g-recaptcha-response');
+    form.elements['g-recaptcha-response'].value = token;
+
+    const formData = new FormData(form);
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString(),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert('Message sent successfully!');
+          form.reset();
+        } else {
+          alert('Failed to send message.');
+        }
+      })
+      .catch((error) => {
+        console.error('Form submission error: ', error);
+      });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const submitButton = document.getElementById('submit');
+  if (submitButton) {
+    submitButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      grecaptcha.execute(config.recaptchaKey, { action: 'submit' }).then(onSubmit);
+    });
+  }
+});
+
 /*
 
 function onSubmit() {
