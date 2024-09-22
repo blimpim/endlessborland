@@ -25,42 +25,27 @@ const contact = `
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-
-              <form method="POST" id="form" netlify data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
-                <input type="hidden" name="bot-field">
-                <label for="email" class="form-label text-primary">Email address:</label>
-                <div class="input-group mb-4">
-                  <span class="input-group-text">
-                    <i class="bi bi-envelope-fill text-success"></i>
-                  </span>
-                  <input type="email" id="email" name="user_email" class="form-control text-success" placeholder="e.g. denis@example.com" required>
-                  <span class="input-group-text">
-                    <span class="tt" data-bs-placement="bottom" title="Enter an email address we can reply to.">
-                      <i class="bi bi-question-circle text-muted"></i>
-                    </span>
-                  </span>
-                </div>
-                <label for="name" class="form-label text-primary">Name:</label>
-                <div class="mb-4 input-group">
-                  <span class="input-group-text">
-                    <i class="bi bi-person-fill text-success"></i>
-                  </span>
-                  <input type="text" id="name" name="user_name" class="form-control" placeholder="e.g. Denis" required>
-                  <span class="input-group-text">
-                    <span class="tt" data-bs-placement="bottom" title="Pretty self explanatory really...">
-                      <i class="bi bi-question-circle text-muted"></i>
-                    </span>
-                  </span>
-                </div>
-                <div class="mb-4 mt-5 form-floating">
-                  <textarea class="form-control" id="query" style="height: 140px" placeholder="query" name="user_message"></textarea>
-                  <label for="query" class="text-success">Your message...</label>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button id="submit" type="submit" value="Submit" class="btn btn-primary btn-4 g-recaptcha" data-sitekey="6Ld5xJslAAAAAErhWKcfbhCUGhsEu7X82tPUW8Wh" data-callback="onSubmit" data-size="invisible" style="font-family: Electrolize;">Send!</button>
-                </div>
+              <form name="contact" method="POST" data-netlify="true">
+                <p>
+                  <label>Your Name: <input type="text" name="name" /></label>
+                </p>
+                <p>
+                  <label>Your Email: <input type="email" name="email" /></label>
+                </p>
+                <p>
+                  <label>Your Role: <select name="role[]" multiple>
+                    <option value="leader">Leader</option>
+                    <option value="follower">Follower</option>
+                  </select></label>
+                </p>
+                <p>
+                  <label>Message: <textarea name="message"></textarea></label>
+                </p>
+                <p>
+                  <button type="submit">Send</button>
+                </p>
               </form>
+              
               <script src="https://www.google.com/recaptcha/api.js" async defer></script>
               <script>
                 function onSubmit(token) {
