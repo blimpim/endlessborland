@@ -1,5 +1,3 @@
-import { config } from '../config';
-
 const contact = `
 <section id="contact">
     
@@ -105,6 +103,8 @@ const contact = `
 `;
 
 document.getElementById('contact').innerHTML = contact;
+
+const recaptchaKey = window.netlifyConfig.recaptchaKey;
 
 function onSubmit(token) {
   const form = document.getElementById('form');
