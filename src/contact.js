@@ -25,7 +25,8 @@ const contact = `
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-              <form name="contact" method="POST" data-netlify="true">
+              <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+              <input type="hidden" name="bot-field">
                 <p>
                   <label>Your Name: <input type="text" name="name" /></label>
                 </p>
