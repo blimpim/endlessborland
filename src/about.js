@@ -14,7 +14,7 @@ const about = `
                 <p class="display-5 d-inline text-warning" id="year_count">&lt;&gt;</p> 
                 <p class="lead d-inline text-primary"> years overall IT experience. </p>
 
-                <ul class="list-unstyled lead text-primary pt-5 style="list-style-type:none;>
+                <ul class="list-unstyled lead text-primary pt-5" style="list-style-type:none;">
                   <li>&lt;Efficient individual contributor with experience of leading small engineering teams. 	&#47;&gt; </li>
                   <li>&lt;Excelled at automation, standardization and technical support. 	&#47;&gt; </li>
                   <li>&lt;Geared towards building versatile, transparent and user-friendly solutions. 	&#47;&gt; </li>

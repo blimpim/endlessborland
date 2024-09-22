@@ -14,8 +14,19 @@ const contact = `
         <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#Modal">
           Send message
         </button>
+      </div>
 
-        <form method="POST" id="form" netlify data-netlify="true" data-netlify-honeypot="bot-field" >
+<!-- Contact Modal -->
+        <div class="modal fade " id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-primary" id="ModalLabel">Write me a message!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+              <form method="POST" id="form"  data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
                 <input type="hidden" name="bot-field">
                 <label for="email" class="form-label text-primary">Email address:</label>
                 <div class="input-group mb-4">
@@ -47,7 +58,7 @@ const contact = `
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button id="submit" type="submit" value="Submit" class="btn btn-primary btn-4 g-recaptcha" data-sitekey="6Ld5xJslAAAAAErhWKcfbhCUGhsEu7X82tPUW8Wh"  data-size="invisible" style="font-family: Electrolize;">Send!</button>
+                  <button id="submit" type="submit" value="Submit" class="btn btn-primary btn-4 g-recaptcha" data-sitekey="6Ld5xJslAAAAAErhWKcfbhCUGhsEu7X82tPUW8Wh" data-callback="onSubmit" data-size="invisible" style="font-family: Electrolize;">Send!</button>
                 </div>
               </form>
               <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -56,19 +67,6 @@ const contact = `
                   document.getElementById("form").submit();
                 }
               </script>
-      </div>
-
-<!-- Contact Modal -->
-        <div class="modal fade " id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-primary" id="ModalLabel">Write me a message!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-
-              
 
                 
               </div>
@@ -110,3 +108,44 @@ const contact = `
 `;
 
 document.getElementById('contact').innerHTML = contact;
+
+function onSubmit(token) {
+  // Находим форму
+  const form = document.getElementById('form');
+
+  // Проверяем, что форма существует
+  if (form) {
+    // Собираем данные формы
+    const formData = new FormData(form);
+
+    // Отправляем данные формы с использованием Fetch API
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString(),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert('Message sent successfully!');
+          form.reset(); // Сбрасываем форму после успешной отправки
+        } else {
+          alert('Failed to send message.');
+        }
+      })
+      .catch((error) => {
+        console.error('Form submission error: ', error);
+      });
+  }
+}
+
+// Добавляем обработчик для кнопки отправки
+document.addEventListener('DOMContentLoaded', function () {
+  // Перехватываем событие отправки формы, чтобы вызвать reCAPTCHA
+  const submitButton = document.getElementById('submit');
+  submitButton.addEventListener('click', function (event) {
+    event.preventDefault(); // Отменяем стандартное действие
+
+    // Вызываем проверку reCAPTCHA
+    grecaptcha.execute();
+  });
+});
