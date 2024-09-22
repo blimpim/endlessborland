@@ -1,3 +1,5 @@
+import { config } from '../config';
+
 const contact = `
 <section id="contact">
     
@@ -58,17 +60,11 @@ const contact = `
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button id="submit" type="submit" value="Submit" class="btn btn-primary btn-4 g-recaptcha" data-sitekey="6Ld5xJslAAAAAErhWKcfbhCUGhsEu7X82tPUW8Wh" data-callback="onSubmit" data-size="invisible" style="font-family: Electrolize;">Send!</button>
+                  <button id="submit" type="submit" value="Submit" class="btn btn-primary btn-4 g-recaptcha"  data-callback="onSubmit" data-size="invisible" style="font-family: Electrolize;">Send!</button>
                 </div>
               </form>
               <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-              <script>
-                function onSubmit(token) {
-                  document.getElementById("form").submit();
-                }
-              </script>
-
-                
+                              
               </div>
               
             </div>
@@ -110,15 +106,13 @@ const contact = `
 document.getElementById('contact').innerHTML = contact;
 
 function onSubmit(token) {
-  // Находим форму
   const form = document.getElementById('form');
-
-  // Проверяем, что форма существует
   if (form) {
-    // Собираем данные формы
+    form.appendChild(document.createElement('input')).setAttribute('name', 'g-recaptcha-response');
+    form.elements['g-recaptcha-response'].value = token;
+
     const formData = new FormData(form);
 
-    // Отправляем данные формы с использованием Fetch API
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -127,7 +121,7 @@ function onSubmit(token) {
       .then((response) => {
         if (response.ok) {
           alert('Message sent successfully!');
-          form.reset(); // Сбрасываем форму после успешной отправки
+          form.reset();
         } else {
           alert('Failed to send message.');
         }
@@ -138,14 +132,12 @@ function onSubmit(token) {
   }
 }
 
-// Добавляем обработчик для кнопки отправки
 document.addEventListener('DOMContentLoaded', function () {
-  // Перехватываем событие отправки формы, чтобы вызвать reCAPTCHA
   const submitButton = document.getElementById('submit');
-  submitButton.addEventListener('click', function (event) {
-    event.preventDefault(); // Отменяем стандартное действие
-
-    // Вызываем проверку reCAPTCHA
-    grecaptcha.execute();
-  });
+  if (submitButton) {
+    submitButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      grecaptcha.execute(config.recaptchaKey, { action: 'submit' }).then(onSubmit);
+    });
+  }
 });
