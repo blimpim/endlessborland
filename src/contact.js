@@ -16,19 +16,7 @@ const contact = `
         <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#Modal">
           Send message
         </button>
-      </div>
-
-<!-- Contact Modal -->
-        <div class="modal fade " id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-primary" id="ModalLabel">Write me a message!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-
-              <form method="POST" id="form"  data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+        <form method="POST" id="form"  data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
                 <input type="hidden" name="bot-field">
                 <label for="email" class="form-label text-primary">Email address:</label>
                 <div class="input-group mb-4">
@@ -63,6 +51,19 @@ const contact = `
                   <button id="submit" type="submit" value="Submit" class="btn btn-primary btn-4 g-recaptcha"  data-callback="onSubmit" data-size="invisible" style="font-family: Electrolize;">Send!</button>
                 </div>
               </form>
+      </div>
+
+<!-- Contact Modal -->
+        <div class="modal fade " id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-primary" id="ModalLabel">Write me a message!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+              
               <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                               
               </div>
