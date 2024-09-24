@@ -3,7 +3,6 @@ import '/src/intro.js';
 import '/src/about.js';
 import '/src/experience.js';
 import '/src/skills.js';
-import '/src/contact.js';
 
 const yearsEl = document.getElementById('year_count');
 
